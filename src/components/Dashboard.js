@@ -1,5 +1,7 @@
 import { TextField, Button } from '@material-ui/core';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import axios from 'axios';
+import Customers from './Customers';
 
 export default function Dashboard() {
 
@@ -8,6 +10,19 @@ export default function Dashboard() {
   const [date, setDate] = useState("");
   const [profession, setProfession] = useState("");
   const [uid, setUid] = useState("");
+  const [customers, setCustomers] = useState([]);
+
+
+  useEffect(() => {
+    const dataFromServer = async () => {
+      const res = await axios.get("/customers");
+      setCustomers(res.data);
+    }
+
+    dataFromServer();
+
+  }, [])
+
 
   const onSubmit = (e) => {
     e.preventDefault();
@@ -21,6 +36,10 @@ export default function Dashboard() {
   return (
     <div>
       <h1>Dashboard</h1>
+      <div>
+        <Customers customers={customers}/>
+      </div>
+      
       <TextField
         required
         type="text"

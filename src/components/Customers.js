@@ -33,7 +33,6 @@ function TablePaginationActions(props) {
     onChangePage(event, Math.max(0, Math.ceil(count / rowsPerPage) - 1));
   };
 
-
   return (
     <div className={classes.root}>
       <IconButton
@@ -117,7 +116,7 @@ export default function Customers(props) {
             ? customers.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
             : customers
           ).map((row) => (
-            <TableRow key={row.uid}>
+            <TableRow key={row.id}>
               <TableCell component="th" scope="row">
                 {row.first_name}
               </TableCell>

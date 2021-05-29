@@ -5,7 +5,8 @@ import Customers from './Customers';
 import AddCustomer from './AddCustomer';
 
 
-export default function Dashboard() {
+export default function Dashboard(props) {
+  const { username } = props.state;
   const [first, setFirst] = useState("");
   const [last, setLast] = useState("");
   const [date, setDate] = useState("");
@@ -29,7 +30,7 @@ export default function Dashboard() {
     setShowAddCustomer(!showAddCustomer)
   }
 
-  console.log('customers', customers)
+  // console.log('customers', customers)
   const onSubmit = (e) => {
     e.preventDefault();
     const postObj = {createdBy: 1, first, last, date, profession, uid};
@@ -54,17 +55,18 @@ export default function Dashboard() {
     <div>
       <h1>
         Dashboard 
-        <div>
-          <Button
-            variant="outlined"
-            onClick={toggleAddCustomer}
-            color={showAddCustomer ? "secondary" : "primary"}
-            style={{width: 175}}
-          >
-            {showAddCustomer ? "Close" : "Add Customer"}
-          </Button>
-        </div>
       </h1>
+      <h2>Welcome, {username}</h2>
+      <div>
+        <Button
+          variant="outlined"
+          onClick={toggleAddCustomer}
+          color={showAddCustomer ? "secondary" : "primary"}
+          style={{width: 175}}
+        >
+          {showAddCustomer ? "Close" : "Add Customer"}
+        </Button>
+      </div>
       {showAddCustomer && (
         <AddCustomer
           first={first}

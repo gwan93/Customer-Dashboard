@@ -104,11 +104,13 @@ export default function Customers(props) {
       <h2>All Customers</h2>
       <Table className={classes.table} aria-label="custom pagination table">
         <TableHead>
-          <TableCell className={classes.tableHead} align="left">First Name</TableCell>
-          <TableCell className={classes.tableHead} align="left">Last Name</TableCell>
-          <TableCell className={classes.tableHead} align="left">UID</TableCell>
-          <TableCell className={classes.tableHead} align="left">Profession</TableCell>
-          <TableCell className={classes.tableHead} align="left">Date Created</TableCell>
+          <TableRow>
+            <TableCell className={classes.tableHead} align="left">First Name</TableCell>
+            <TableCell className={classes.tableHead} align="left">Last Name</TableCell>
+            <TableCell className={classes.tableHead} align="left">UID</TableCell>
+            <TableCell className={classes.tableHead} align="left">Profession</TableCell>
+            <TableCell className={classes.tableHead} align="left">Date Created</TableCell>
+          </TableRow>
         </TableHead>
         <TableBody>
           {(rowsPerPage > 0

@@ -1,8 +1,16 @@
 import { TextField, Button } from '@material-ui/core';
 import { useState } from 'react';
+import { makeStyles } from '@material-ui/core/styles';
+
+const useStyles = makeStyles({
+  formElement: {
+    display: 'block'
+  }
+});
 
 
 export default function Login() {
+  const classes = useStyles();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -28,6 +36,7 @@ export default function Login() {
         value={email}
         variant="outlined"
         onChange={(e) => setEmail(e.target.value)}
+        className={classes.formElement}
       />
 
       <TextField
@@ -38,6 +47,7 @@ export default function Login() {
         value={password}
         variant="outlined"
         onChange={(e) => setPassword(e.target.value)}
+        className={classes.formElement}
       />
 
       <Button type="submit" variant="contained" onClick={(e) => onSubmit(e)}>

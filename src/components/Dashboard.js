@@ -1,10 +1,17 @@
 import { TextField, Button } from '@material-ui/core';
 import { useEffect, useState } from 'react';
+import { makeStyles } from '@material-ui/core/styles';
 import axios from 'axios';
 import Customers from './Customers';
 
-export default function Dashboard() {
+const useStyles = makeStyles({
+  formElement: {
+    display: 'block'
+  }
+});
 
+export default function Dashboard() {
+  const classes = useStyles();
   const [first, setFirst] = useState("");
   const [last, setLast] = useState("");
   const [date, setDate] = useState("");
@@ -48,6 +55,7 @@ export default function Dashboard() {
         value={first}
         variant="outlined"
         onChange={(e) => setFirst(e.target.value)}
+        className={classes.formElement}
       />
 
       <TextField
@@ -58,6 +66,7 @@ export default function Dashboard() {
         value={last}
         variant="outlined"
         onChange={(e) => setLast(e.target.value)}
+        className={classes.formElement}
       />
 
       <TextField
@@ -68,6 +77,7 @@ export default function Dashboard() {
         value={date}
         variant="outlined"
         onChange={(e) => setDate(e.target.value)}
+        className={classes.formElement}
       />
 
       <TextField
@@ -78,6 +88,7 @@ export default function Dashboard() {
         value={profession}
         variant="outlined"
         onChange={(e) => setProfession(e.target.value)}
+        className={classes.formElement}
       />
 
       <TextField
@@ -88,6 +99,7 @@ export default function Dashboard() {
         value={uid}
         variant="outlined"
         onChange={(e) => setUid(e.target.value)}
+        className={classes.formElement}
       />
 
 

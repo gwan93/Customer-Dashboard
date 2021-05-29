@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Button } from '@material-ui/core';
+import { Button, CircularProgress } from '@material-ui/core';
 import axios from 'axios';
 import Customers from './Customers';
 import AddCustomer from './AddCustomer';
@@ -29,28 +29,41 @@ export default function Dashboard() {
     setShowAddCustomer(!showAddCustomer)
   }
 
-
+  console.log('customers', customers)
   const onSubmit = (e) => {
     e.preventDefault();
-    console.log(first, last, date, profession, uid);
-    // post information
-    // set loading
-    // analyze response
-    // if fail then show error message
+    const postObj = {createdBy: 1, first, last, date, profession, uid};
+    axios.post("/customers", postObj)
+    .then(res => {
+      if (res.status === 200) {
+        setCustomers([...customers, res.data])
+        setFirst("");
+        setLast("");
+        setDate("");
+        setProfession("")
+        setUid("")
+      }
+    })
+    .catch(err => {
+      console.log("ERROR!", err)
+    })
+
   }
 
   return (
     <div>
       <h1>
-        Dashboard
-        <Button
-          variant="outlined"
-          onClick={toggleAddCustomer}
-          color={showAddCustomer ? "secondary" : "primary"}
-          style={{width: 175}}
-        >
-          {showAddCustomer ? "Close" : "Add Customer"}
-        </Button>
+        Dashboard 
+        <div>
+          <Button
+            variant="outlined"
+            onClick={toggleAddCustomer}
+            color={showAddCustomer ? "secondary" : "primary"}
+            style={{width: 175}}
+          >
+            {showAddCustomer ? "Close" : "Add Customer"}
+          </Button>
+        </div>
       </h1>
       {showAddCustomer && (
         <AddCustomer

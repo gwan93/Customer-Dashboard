@@ -22,14 +22,17 @@ export default function Login(props) {
   const onSubmit = (e) => {
     e.preventDefault();
     if (username.length === 0 || password.length === 0) {
-      setErrorMessage("Please provide a username and a password");
+      setErrorMessage("Please provide a username and a password.");
       return;
     }
     console.log(username, password);
     const postObj = {username, password};
     axios.post("/login", postObj)
     .then(response => {
-      console.log("SUCCESS", response)
+      if (response.data.status === 401) {
+        setErrorMessage("Incorrect username or password.");
+        return;
+      }
       setState({
         ...state,
         username: response.data.username,

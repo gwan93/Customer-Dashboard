@@ -2,6 +2,7 @@ import { TextField, Button } from '@material-ui/core';
 import { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import axios from 'axios';
+import { useHistory } from "react-router-dom";
 
 const useStyles = makeStyles({
   formElement: {
@@ -11,13 +12,19 @@ const useStyles = makeStyles({
 
 
 export default function Login(props) {
+  const history = useHistory();
   const classes = useStyles();
   const { state, setState, setCookie } = props;
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
 
   const onSubmit = (e) => {
     e.preventDefault();
+    if (username.length === 0 || password.length === 0) {
+      setErrorMessage("Please provide a username and a password");
+      return;
+    }
     console.log(username, password);
     const postObj = {username, password};
     axios.post("/login", postObj)
@@ -29,6 +36,7 @@ export default function Login(props) {
         userId: response.data.id
       })
       setCookie("userInfo", {username: response.data.username, userId: response.data.id}, {path: "/"})
+      history.push("/dashboard");
     })
     .catch(err => {
       console.log("ERROR", err)
@@ -45,6 +53,7 @@ export default function Login(props) {
   return (
     <>
       <h1>Login</h1>
+      {errorMessage.length > 0 && <h6>{errorMessage}</h6>}
       <TextField
         required
         type="text"

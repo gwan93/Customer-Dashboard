@@ -4,32 +4,33 @@ import Dashboard from './components/Dashboard';
 import Home from './components/Home';
 import Navbar from './components/Navbar';
 import './App.css';
-import Cookies from 'js-cookie';
 import { useEffect, useState } from 'react';
+import { useCookies } from "react-cookie";
 
 function App() {
   const [state, setState] = useState({
     username: "",
     userId: null
   });
+  const [cookies, setCookie] = useCookies([]);
 
   useEffect(() => {
-    if (Cookies) {
-      setState({
+    if (cookies.userInfo) {
+      setState(state => ({
         ...state,
-        username: Cookies.get('username'),
-        userId: Cookies.get('userId')
-      })
+        username: cookies.userInfo.username,
+        userId: cookies.userInfo.userId
+      }))
     }
-  }, [state])
+  }, [cookies])
 
   return (
     <main>
       <BrowserRouter>
         <Navbar />
         <Switch>
-          <Route path="/login" component={Login}></Route>
-          <Route path="/dashboard" component={Dashboard}></Route>
+          <Route path="/login" component={() => <Login state={state} setState={setState} setCookie={setCookie}/>  }></Route>
+          <Route path="/dashboard" component={() => <Dashboard state={state}/>}></Route>
           <Route exact path="/" component={Home}></Route>
         </Switch>
       </BrowserRouter>

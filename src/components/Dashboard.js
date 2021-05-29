@@ -1,23 +1,18 @@
-import { TextField, Button } from '@material-ui/core';
 import { useEffect, useState } from 'react';
-import { makeStyles } from '@material-ui/core/styles';
+import { Button } from '@material-ui/core';
 import axios from 'axios';
 import Customers from './Customers';
+import AddCustomer from './AddCustomer';
 
-const useStyles = makeStyles({
-  formElement: {
-    display: 'block'
-  }
-});
 
 export default function Dashboard() {
-  const classes = useStyles();
   const [first, setFirst] = useState("");
   const [last, setLast] = useState("");
   const [date, setDate] = useState("");
   const [profession, setProfession] = useState("");
   const [uid, setUid] = useState("");
   const [customers, setCustomers] = useState([]);
+  const [showAddCustomer, setShowAddCustomer] = useState(false);
 
 
   useEffect(() => {
@@ -29,6 +24,10 @@ export default function Dashboard() {
     dataFromServer();
 
   }, [])
+
+  const toggleAddCustomer = () => {
+    setShowAddCustomer(!showAddCustomer)
+  }
 
 
   const onSubmit = (e) => {
@@ -42,71 +41,33 @@ export default function Dashboard() {
 
   return (
     <div>
-      <h1>Dashboard</h1>
-      <div>
-        <Customers customers={customers}/>
-      </div>
-      
-      <TextField
-        required
-        type="text"
-        id="first"
-        label="First Name"
-        value={first}
-        variant="outlined"
-        onChange={(e) => setFirst(e.target.value)}
-        className={classes.formElement}
-      />
-
-      <TextField
-        required
-        type="text"
-        id="last"
-        label="Last Name"
-        value={last}
-        variant="outlined"
-        onChange={(e) => setLast(e.target.value)}
-        className={classes.formElement}
-      />
-
-      <TextField
-        required
-        type="text"
-        id="date"
-        label="Date"
-        value={date}
-        variant="outlined"
-        onChange={(e) => setDate(e.target.value)}
-        className={classes.formElement}
-      />
-
-      <TextField
-        required
-        type="text"
-        id="profession"
-        label="Profession"
-        value={profession}
-        variant="outlined"
-        onChange={(e) => setProfession(e.target.value)}
-        className={classes.formElement}
-      />
-
-      <TextField
-        required
-        type="text"
-        id="uid"
-        label="UID"
-        value={uid}
-        variant="outlined"
-        onChange={(e) => setUid(e.target.value)}
-        className={classes.formElement}
-      />
-
-
-
-      <Button type="submit" variant="contained" onClick={(e) => onSubmit(e)}>
-        Create Customer
-      </Button>
+      <h1>
+        Dashboard
+        <Button
+          variant="outlined"
+          onClick={toggleAddCustomer}
+          color={showAddCustomer ? "secondary" : "primary"}
+          style={{width: 175}}
+        >
+          {showAddCustomer ? "Close" : "Add Customer"}
+        </Button>
+      </h1>
+      {showAddCustomer && (
+        <AddCustomer
+          first={first}
+          setFirst={setFirst}
+          last={last}
+          setLast={setLast}
+          date={date}
+          setDate={setDate}
+          profession={profession}
+          setProfession={setProfession}
+          uid={uid}
+          setUid={setUid}
+          onSubmit={onSubmit}
+        />
+      )}
+      <Customers customers={customers} />
     </div>
-  )
+  );
 }

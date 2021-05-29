@@ -1,11 +1,13 @@
 import { Link } from "react-router-dom";
 
-export default function Navbar() {
+export default function Navbar(props) {
+  const { state } = props;
+
   return (
     <div>
       <Link to="/">Home </Link>
-      <Link to="/dashboard">Dashboard </Link>
-      <Link to="/login">Login </Link>
+      {state.username && <Link to="/dashboard">Dashboard </Link>}
+      {!state.username && <Link to="/login">Login </Link>}
     </div>
   )
 }

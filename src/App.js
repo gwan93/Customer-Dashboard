@@ -27,9 +27,9 @@ function App() {
   return (
     <main>
       <BrowserRouter>
-        <Navbar />
+        <Navbar state={state}/>
         <Switch>
-          <Route path="/login" component={() => <Login state={state} setState={setState} setCookie={setCookie}/>  }></Route>
+          <Route path="/login" component={() => <Login state={state} setState={setState} setCookie={setCookie}/>}></Route>
           <Route path="/dashboard" component={() => <Dashboard state={state}/>}></Route>
           <Route exact path="/" component={Home}></Route>
         </Switch>

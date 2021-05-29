@@ -1,6 +1,7 @@
 import { TextField, Button } from '@material-ui/core';
 import { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
+import axios from 'axios';
 
 const useStyles = makeStyles({
   formElement: {
@@ -9,14 +10,30 @@ const useStyles = makeStyles({
 });
 
 
-export default function Login() {
+export default function Login(props) {
   const classes = useStyles();
-  const [email, setEmail] = useState("");
+  const { state, setState, setCookie } = props;
+  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
   const onSubmit = (e) => {
     e.preventDefault();
-    console.log(email, password);
+    console.log(username, password);
+    const postObj = {username, password};
+    axios.post("/login", postObj)
+    .then(response => {
+      console.log("SUCCESS", response)
+      setState({
+        ...state,
+        username: response.data.username,
+        userId: response.data.id
+      })
+      setCookie("userInfo", {username: response.data.username, userId: response.data.id}, {path: "/"})
+    })
+    .catch(err => {
+      console.log("ERROR", err)
+    })
+
     // post information
     // set loading
     // analyze response
@@ -31,11 +48,11 @@ export default function Login() {
       <TextField
         required
         type="text"
-        id="email"
-        label="Email"
-        value={email}
+        id="username"
+        label="Username"
+        value={username}
         variant="outlined"
-        onChange={(e) => setEmail(e.target.value)}
+        onChange={(e) => setUsername(e.target.value)}
         className={classes.formElement}
       />
 

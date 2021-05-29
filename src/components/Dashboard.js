@@ -3,10 +3,12 @@ import { Button } from '@material-ui/core';
 import axios from 'axios';
 import Customers from './Customers';
 import AddCustomer from './AddCustomer';
+import Logout from './Logout';
 
 
 export default function Dashboard(props) {
   const { username } = props.state;
+  const { setState, removeCookie } = props;
   const [first, setFirst] = useState("");
   const [last, setLast] = useState("");
   const [date, setDate] = useState("");
@@ -57,6 +59,7 @@ export default function Dashboard(props) {
         Dashboard 
       </h1>
       <h2>Welcome, {username}</h2>
+      <Logout setState={setState} removeCookie={removeCookie}/>
       <div>
         <Button
           variant="outlined"

@@ -12,7 +12,7 @@ function App() {
     username: "",
     userId: null
   });
-  const [cookies, setCookie] = useCookies([]);
+  const [cookies, setCookie, removeCookie] = useCookies([]);
 
   useEffect(() => {
     if (cookies.userInfo) {
@@ -30,7 +30,7 @@ function App() {
         <Navbar state={state}/>
         <Switch>
           <Route path="/login" component={() => <Login state={state} setState={setState} setCookie={setCookie}/>}></Route>
-          <Route path="/dashboard" component={() => <Dashboard state={state}/>}></Route>
+          <Route path="/dashboard" component={() => <Dashboard state={state} setState={setState} removeCookie={removeCookie}/>}></Route>
           <Route exact path="/" component={Home}></Route>
         </Switch>
       </BrowserRouter>

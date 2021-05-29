@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Button, CircularProgress } from '@material-ui/core';
+import { Button } from '@material-ui/core';
 import axios from 'axios';
 import Customers from './Customers';
 import AddCustomer from './AddCustomer';

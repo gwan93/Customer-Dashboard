@@ -8,7 +8,7 @@ import Logout from './Logout';
 
 export default function Dashboard(props) {
   const { username } = props.state;
-  const { setState, removeCookie } = props;
+  const { state, setState, removeCookie } = props;
   const [first, setFirst] = useState("");
   const [last, setLast] = useState("");
   const [date, setDate] = useState("");
@@ -16,7 +16,7 @@ export default function Dashboard(props) {
   const [uid, setUid] = useState("");
   const [customers, setCustomers] = useState([]);
   const [showAddCustomer, setShowAddCustomer] = useState(false);
-
+  const [errorMessage, setErrorMessage] = useState("");
 
   useEffect(() => {
     const dataFromServer = async () => {
@@ -35,7 +35,12 @@ export default function Dashboard(props) {
   // console.log('customers', customers)
   const onSubmit = (e) => {
     e.preventDefault();
-    const postObj = {createdBy: 1, first, last, date, profession, uid};
+    const createdBy = state.userId;
+    if (!createdBy || !first || !last || !date || !profession || !uid) {
+      setErrorMessage("Please fill out all required fields.");
+      return;
+    }
+    const postObj = {createdBy, first, last, date, profession, uid};
     axios.post("/customers", postObj)
     .then(res => {
       if (res.status === 200) {
@@ -55,9 +60,7 @@ export default function Dashboard(props) {
 
   return (
     <div>
-      <h1>
-        Dashboard 
-      </h1>
+      <h1>Dashboard</h1>
       <h2>Welcome, {username}</h2>
       <Logout setState={setState} removeCookie={removeCookie}/>
       <div>
@@ -85,6 +88,7 @@ export default function Dashboard(props) {
           onSubmit={onSubmit}
         />
       )}
+      {errorMessage.length !== 0 && <h6>{errorMessage}</h6>}
       <Customers customers={customers} />
     </div>
   );

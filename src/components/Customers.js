@@ -5,6 +5,7 @@ import {Table,TableBody,TableCell, TableContainer, TableFooter, TablePagination,
 import {KeyboardArrowLeft, KeyboardArrowRight} from '@material-ui/icons';
 import FirstPageIcon from '@material-ui/icons/FirstPage'
 import LastPageIcon from '@material-ui/icons/LastPage'
+import DownloadCSV from './DownloadCSV';
 const useStyles1 = makeStyles((theme) => ({
   root: {
     flexShrink: 0,
@@ -101,6 +102,7 @@ export default function Customers(props) {
   return (
     <TableContainer component={Paper}>
       <h2>All Customers</h2>
+      <DownloadCSV customers={customers}/>
       <Table className={classes.table} aria-label="custom pagination table">
         <TableHead>
           <TableRow>

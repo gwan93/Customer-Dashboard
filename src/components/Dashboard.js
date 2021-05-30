@@ -5,7 +5,6 @@ import Customers from './Customers';
 import AddCustomer from './AddCustomer';
 import Logout from './Logout';
 
-
 export default function Dashboard(props) {
   const { username } = props.state;
   const { state, setState, removeCookie } = props;
@@ -32,7 +31,6 @@ export default function Dashboard(props) {
     setShowAddCustomer(!showAddCustomer)
   }
 
-  // console.log('customers', customers)
   const onSubmit = (e) => {
     e.preventDefault();
     const createdBy = state.userId;
@@ -55,7 +53,6 @@ export default function Dashboard(props) {
     .catch(err => {
       console.log("ERROR!", err)
     })
-
   }
 
   return (

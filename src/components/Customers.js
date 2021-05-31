@@ -6,6 +6,8 @@ import {KeyboardArrowLeft, KeyboardArrowRight} from '@material-ui/icons';
 import FirstPageIcon from '@material-ui/icons/FirstPage'
 import LastPageIcon from '@material-ui/icons/LastPage'
 import DownloadCSV from './DownloadCSV';
+import moment from 'moment';
+
 const useStyles1 = makeStyles((theme) => ({
   root: {
     flexShrink: 0,
@@ -132,7 +134,7 @@ export default function Customers(props) {
                 {row.profession}
               </TableCell>
               <TableCell style={{ width: 160 }} align="left">
-                {row.date_created}
+                {moment.utc(row.date_created).format('MMMM Do YYYY, h:mm:ss a')}
               </TableCell>
             </TableRow>
           ))}

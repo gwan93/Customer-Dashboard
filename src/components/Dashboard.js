@@ -18,13 +18,14 @@ export default function Dashboard(props) {
   const [errorMessage, setErrorMessage] = useState("");
 
   useEffect(() => {
-    const dataFromServer = async () => {
-      const res = await axios.get("/customers");
-      setCustomers(res.data);
+    axios.get("/customers")
+    .then(res => {
+      setCustomers(res.data)
+    })
+
+    return () => {
+      setCustomers([]);
     }
-
-    dataFromServer();
-
   }, [])
 
   const toggleAddCustomer = () => {

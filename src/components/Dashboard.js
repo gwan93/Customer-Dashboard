@@ -21,6 +21,7 @@ export default function Dashboard(props) {
       setCustomers(res.data)
     })
 
+    // Cleanup if Dashboard is unmounted before the above async request completes
     return () => {
       setCustomers([]);
     }

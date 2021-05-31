@@ -3,6 +3,8 @@ import Login from './components/Login';
 import Dashboard from './components/Dashboard';
 import Home from './components/Home';
 import Navbar from './components/Navbar';
+import ProtectedRoute from './components/ProtectedRoute';
+import Unauthorized from './components/Unauthorized';
 import './App.css';
 import { useEffect, useState } from 'react';
 import { useCookies } from "react-cookie";
@@ -30,8 +32,9 @@ function App() {
         <Navbar state={state}/>
         <Switch>
           <Route path="/login" component={() => <Login state={state} setState={setState} setCookie={setCookie}/>}></Route>
-          <Route path="/dashboard" component={() => <Dashboard state={state} setState={setState} removeCookie={removeCookie}/>}></Route>
+          <ProtectedRoute path="/dashboard" state={state} setState={setState} removeCookie={removeCookie} component={Dashboard}></ProtectedRoute>
           <Route exact path="/" component={Home}></Route>
+          <Route exact path="/unauthorized" component={Unauthorized}></Route>
         </Switch>
       </BrowserRouter>
     </main>

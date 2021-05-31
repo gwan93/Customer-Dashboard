@@ -6,8 +6,7 @@ import AddCustomer from './AddCustomer';
 import Logout from './Logout';
 
 export default function Dashboard(props) {
-  const { username } = props.state;
-  const { state, setState, removeCookie } = props;
+  const { state, setState, removeCookie, username } = props;
   const [first, setFirst] = useState("");
   const [last, setLast] = useState("");
   const [profession, setProfession] = useState("");

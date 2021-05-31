@@ -134,7 +134,7 @@ export default function Customers(props) {
                 {row.profession}
               </TableCell>
               <TableCell style={{ width: 160 }} align="left">
-                {moment.utc(row.date_created).format('MMMM Do YYYY, h:mm:ss a')}
+                {moment.utc(row.date_created).local().format('MMMM Do YYYY, h:mm:ss a')}
               </TableCell>
             </TableRow>
           ))}

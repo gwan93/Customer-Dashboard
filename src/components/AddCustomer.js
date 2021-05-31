@@ -10,7 +10,7 @@ const useStyles = makeStyles({
 
 export default function AddCustomer(props) {
   const classes = useStyles();
-  const {first, setFirst, last, setLast, date, setDate, profession, setProfession, uid, setUid, onSubmit } = props;
+  const {first, setFirst, last, setLast, profession, setProfession, onSubmit } = props;
   
   return (
     <>
@@ -39,33 +39,11 @@ export default function AddCustomer(props) {
       <TextField
         required
         type="text"
-        id="date"
-        label="Date"
-        value={date}
-        variant="outlined"
-        onChange={(e) => setDate(e.target.value)}
-        className={classes.formElement}
-      />
-
-      <TextField
-        required
-        type="text"
         id="profession"
         label="Profession"
         value={profession}
         variant="outlined"
         onChange={(e) => setProfession(e.target.value)}
-        className={classes.formElement}
-      />
-
-      <TextField
-        required
-        type="text"
-        id="uid"
-        label="UID"
-        value={uid}
-        variant="outlined"
-        onChange={(e) => setUid(e.target.value)}
         className={classes.formElement}
       />
 

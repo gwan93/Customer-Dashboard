@@ -10,9 +10,7 @@ export default function Dashboard(props) {
   const { state, setState, removeCookie } = props;
   const [first, setFirst] = useState("");
   const [last, setLast] = useState("");
-  const [date, setDate] = useState("");
   const [profession, setProfession] = useState("");
-  const [uid, setUid] = useState("");
   const [customers, setCustomers] = useState([]);
   const [showAddCustomer, setShowAddCustomer] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
@@ -35,20 +33,18 @@ export default function Dashboard(props) {
   const onSubmit = (e) => {
     e.preventDefault();
     const createdBy = state.userId;
-    if (!createdBy || !first || !last || !date || !profession || !uid) {
+    if (!createdBy || !first || !last || !profession) {
       setErrorMessage("Please fill out all required fields.");
       return;
     }
-    const postObj = {createdBy, first, last, date, profession, uid};
+    const postObj = {createdBy, first, last, profession};
     axios.post("/customers", postObj)
     .then(res => {
       if (res.status === 200) {
         setCustomers([...customers, res.data])
         setFirst("");
         setLast("");
-        setDate("");
-        setProfession("")
-        setUid("")
+        setProfession("");
       }
     })
     .catch(err => {
@@ -77,12 +73,8 @@ export default function Dashboard(props) {
           setFirst={setFirst}
           last={last}
           setLast={setLast}
-          date={date}
-          setDate={setDate}
           profession={profession}
           setProfession={setProfession}
-          uid={uid}
-          setUid={setUid}
           onSubmit={onSubmit}
         />
       )}

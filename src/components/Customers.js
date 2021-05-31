@@ -112,7 +112,7 @@ export default function Customers(props) {
             <TableCell className={classes.tableHead} align="left">Last Name</TableCell>
             <TableCell className={classes.tableHead} align="left">UID</TableCell>
             <TableCell className={classes.tableHead} align="left">Profession</TableCell>
-            <TableCell className={classes.tableHead} align="left">Date Created</TableCell>
+            <TableCell className={classes.tableHead} align="left">Created On</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>

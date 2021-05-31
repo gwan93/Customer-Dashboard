@@ -5,7 +5,7 @@ export default function ProtectedRoute({ component: Component, state, ...rest })
     <Route {...rest} render={
       props => {
         if (state.username !== "" && state.userId !== null) {
-          return <Component {...rest} {...props} {...state}/>
+          return <Component {...rest} {...props} state={state}/>
         } else {
           return <Redirect to={
             {

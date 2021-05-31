@@ -6,7 +6,7 @@ import AddCustomer from './AddCustomer';
 import Logout from './Logout';
 
 export default function Dashboard(props) {
-  const { state, setState, removeCookie, username } = props;
+  const { state, setState, removeCookie } = props;
   const [first, setFirst] = useState("");
   const [last, setLast] = useState("");
   const [profession, setProfession] = useState("");
@@ -55,7 +55,7 @@ export default function Dashboard(props) {
   return (
     <div>
       <h1>Dashboard</h1>
-      <h2>Welcome, {username}</h2>
+      <h2>Welcome, {state.username}</h2>
       <Logout setState={setState} removeCookie={removeCookie}/>
       <div>
         <Button
@@ -79,7 +79,7 @@ export default function Dashboard(props) {
         />
       )}
       {errorMessage.length !== 0 && <h6>{errorMessage}</h6>}
-      <Customers customers={customers} />
+      <Customers customers={customers} state={state} />
     </div>
   );
 }

@@ -2,7 +2,7 @@ import { CSVLink } from "react-csv";
 
 
 export default function DownloadCSV(props) {
-  const { customers } = props;
+  const { customers, linkText } = props;
 
   const headers = [
     { label: "First Name", key: "first_name"},
@@ -14,7 +14,7 @@ export default function DownloadCSV(props) {
 
   return (
     <div>
-      <CSVLink data={customers} filename={"customers.csv"} headers={headers}>Download as CSV</CSVLink>
+      <CSVLink data={customers} filename={"customers.csv"} headers={headers}>{linkText}</CSVLink>
     </div>
   )
 }

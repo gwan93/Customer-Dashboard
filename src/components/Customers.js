@@ -88,7 +88,7 @@ export default function Customers(props) {
   const classes = useStyles2();
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
-  const { customers } = props;
+  const { customers, state } = props;
 
   const emptyRows = rowsPerPage - Math.min(rowsPerPage, customers.length - page * rowsPerPage);
 
@@ -101,10 +101,15 @@ export default function Customers(props) {
     setPage(0);
   };
 
+  const customersCreatedByMe = customers.filter(customer => {
+    return customer.created_by === state.username
+  })
+
   return (
     <TableContainer component={Paper}>
       <h2>All Customers</h2>
-      <DownloadCSV customers={customers}/>
+      <DownloadCSV customers={customers} linkText="Export All Customers (CSV)"/>
+      <DownloadCSV customers={customersCreatedByMe} linkText="Export Customers Created By Me (CSV)"/>
       <Table className={classes.table} aria-label="custom pagination table">
         <TableHead>
           <TableRow>

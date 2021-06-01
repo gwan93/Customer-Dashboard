@@ -103,20 +103,23 @@ export default function Dashboard(props) {
   const [last, setLast] = useState("");
   const [profession, setProfession] = useState("");
   const [customers, setCustomers] = useState([]);
+  const [myCustomers, setMyCustomers] = useState([]);
   const [errorMessage, setErrorMessage] = useState("");
   const classes = useStyles();
 
   useEffect(() => {
     axios.get("/customers")
     .then(res => {
-      setCustomers(res.data.sort((a,b) => a.id - b.id))
+      setCustomers(res.data.sort((a,b) => a.id - b.id));
+      const customersCreatedByMe = res.data.filter(customer => customer.created_by === state.username)
+      setMyCustomers(customersCreatedByMe);
     })
 
     // Cleanup if Dashboard is unmounted before the above async request completes
     return () => {
       setCustomers([]);
     }
-  }, [])
+  }, [state.username])
 
   const [open, setOpen] = useState(true);
   const handleDrawerOpen = () => {
@@ -138,7 +141,9 @@ export default function Dashboard(props) {
     axios.post("/customers", postObj)
     .then(res => {
       if (res.status === 200) {
-        setCustomers([...customers, res.data])
+        const replaceCreatedBy = {...res.data, created_by: state.username}
+        setCustomers([...customers, res.data]);
+        setMyCustomers(myCustomers.concat([replaceCreatedBy]));
         setFirst("");
         setLast("");
         setProfession("");
@@ -214,7 +219,7 @@ export default function Dashboard(props) {
               {/* All Customers */}
               <Grid item xs={12}>
                 <Paper className={classes.paper}>
-                  <Customers customers={customers} state={state} />
+                  <Customers customers={customers} myCustomers={myCustomers} state={state} />
                 </Paper>
               </Grid>
             </Grid>

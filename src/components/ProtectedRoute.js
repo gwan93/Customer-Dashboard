@@ -5,9 +5,7 @@ export default function ProtectedRoute({ component: Component, state, ...rest })
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    if (state.username) {
-      setLoading(false);
-    }
+    setLoading(false)
   }, [state])
   
   return (

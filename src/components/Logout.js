@@ -14,6 +14,9 @@ export default function Logout(props) {
   const history = useHistory();
   const { setState, removeCookie } = props;
 
+  // Submits request to backend to delete Express cookie
+  // Then resets state and removes client Cookie
+  // Finally redirects to home page
   function logoutUser() {
     axios.post("/logout")
     .then(() => {

@@ -17,7 +17,7 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
   },
   toolbar: {
-    paddingRight: 24, // keep right padding when drawer closed
+    paddingRight: 24,
   },
   toolbarIcon: {
     display: 'flex',
@@ -105,9 +105,11 @@ export default function Dashboard(props) {
   const [customers, setCustomers] = useState([]);
   const [myCustomers, setMyCustomers] = useState([]);
   const [errorMessage, setErrorMessage] = useState("");
+  const [open, setOpen] = useState(true);
   const classes = useStyles();
 
   useEffect(() => {
+    // Retrieve customers data when component is mounted
     axios.get("/customers")
     .then(res => {
       setCustomers(res.data.sort((a,b) => a.id - b.id));
@@ -121,7 +123,7 @@ export default function Dashboard(props) {
     }
   }, [state.username])
 
-  const [open, setOpen] = useState(true);
+  // Handlers to open and closer Drawer
   const handleDrawerOpen = () => {
     setOpen(true);
   };
@@ -133,6 +135,7 @@ export default function Dashboard(props) {
   const onSubmit = (e) => {
     e.preventDefault();
     const createdBy = state.userId;
+    // Check that all fields are filled out
     if (!createdBy || !first || !last || !profession) {
       setErrorMessage("Please fill out all required fields.");
       return;
@@ -141,9 +144,11 @@ export default function Dashboard(props) {
     axios.post("/customers", postObj)
     .then(res => {
       if (res.status === 200) {
+        // res.data will come back with a key "created_by" with a value of integer. Replace that with username.
         const replaceCreatedBy = {...res.data, created_by: state.username}
-        setCustomers([...customers, res.data]);
+        setCustomers([...customers, replaceCreatedBy]);
         setMyCustomers(myCustomers.concat([replaceCreatedBy]));
+        // Clear all fields
         setFirst("");
         setLast("");
         setProfession("");

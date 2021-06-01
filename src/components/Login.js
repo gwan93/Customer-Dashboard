@@ -29,15 +29,16 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function Login(props) {
-  const history = useHistory();
+  const history = useHistory(); // For redirection after successful login
   const classes = useStyles();
   const { state, setState, setCookie } = props;
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [errorMessage, setErrorMessage] = useState("");
+  const [errorMessage, setErrorMessage] = useState(""); // Provide user feedback on unsuccessful login
 
   const onSubmit = (e) => {
     e.preventDefault();
+    // Check that a username AND password have been provided
     if (username.length === 0 || password.length === 0) {
       setErrorMessage("Please provide a username and a password.");
       return;
@@ -49,12 +50,14 @@ export default function Login(props) {
         setErrorMessage("Incorrect username or password.");
         return;
       }
+      // Update state and create client cookie with authentication details
       setState({
         ...state,
         username: response.data.username,
         userId: response.data.id
       })
       setCookie("userInfo", {username: response.data.username, userId: response.data.id}, {path: "/"})
+      // Redirect user after successfully logging in
       history.push("/dashboard");
     })
     .catch(err => {

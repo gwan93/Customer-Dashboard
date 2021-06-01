@@ -8,6 +8,7 @@ import LastPageIcon from '@material-ui/icons/LastPage'
 import DownloadCSV from './DownloadCSV';
 import moment from 'moment';
 
+// Styling and component logic for pagination row
 const useStyles1 = makeStyles((theme) => ({
   root: {
     flexShrink: 0,
@@ -73,7 +74,7 @@ TablePaginationActions.propTypes = {
   rowsPerPage: PropTypes.number.isRequired,
 };
 
-
+// Styling and component logic for table
 const useStyles2 = makeStyles({
   table: {
     minWidth: 500,

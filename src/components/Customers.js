@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
-import {Table,TableBody,TableCell, TableContainer, TableFooter, TablePagination, TableRow, Paper, TableHead, IconButton} from '@material-ui/core';
+import {Table,TableBody,TableCell, TableContainer, TableFooter, TablePagination, TableRow, Typography, TableHead, IconButton} from '@material-ui/core';
 import {KeyboardArrowLeft, KeyboardArrowRight} from '@material-ui/icons';
 import FirstPageIcon from '@material-ui/icons/FirstPage'
 import LastPageIcon from '@material-ui/icons/LastPage'
@@ -80,7 +80,15 @@ const useStyles2 = makeStyles({
   },
   tableHead: {
     fontWeight: 900,
-    width: 120
+  },
+  header: {
+    display: 'flex',
+    justifyContent: 'space-between'
+  },
+  headerRight: {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'flex-end'
   }
 });
 
@@ -106,18 +114,24 @@ export default function Customers(props) {
   })
 
   return (
-    <TableContainer component={Paper}>
-      <h2>All Customers</h2>
-      <DownloadCSV customers={customers} linkText="Export All Customers (CSV)"/>
-      <DownloadCSV customers={customersCreatedByMe} linkText="Export Customers Created By Me (CSV)"/>
+    <TableContainer>
+      <header className={classes.header}>
+        <div>
+          <Typography component="h2" variant="h6" color="primary" gutterBottom>All Customers</Typography>
+        </div>
+        <div className={classes.headerRight}>
+          <DownloadCSV customers={customers} linkText="Export All Customers (CSV)"/>
+          <DownloadCSV customers={customersCreatedByMe} linkText="Export Customers Created By Me (CSV)"/>
+        </div>
+      </header>
       <Table className={classes.table} aria-label="custom pagination table">
         <TableHead>
           <TableRow>
             <TableCell className={classes.tableHead} align="left">First Name</TableCell>
             <TableCell className={classes.tableHead} align="left">Last Name</TableCell>
-            <TableCell className={classes.tableHead} align="left">UID</TableCell>
             <TableCell className={classes.tableHead} align="left">Profession</TableCell>
             <TableCell className={classes.tableHead} align="left">Created On</TableCell>
+            <TableCell className={classes.tableHead} align="left">UID</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -126,20 +140,20 @@ export default function Customers(props) {
             : customers
           ).map((row) => (
             <TableRow key={row.id}>
-              <TableCell component="th" scope="row">
+              <TableCell>
                 {row.first_name}
               </TableCell>
-              <TableCell component="th" scope="row">
+              <TableCell>
                 {row.last_name}
               </TableCell>
-              <TableCell style={{ width: 160 }} align="left">
-                {row.uid}
-              </TableCell>
-              <TableCell style={{ width: 160 }} align="left">
+              <TableCell>
                 {row.profession}
               </TableCell>
-              <TableCell style={{ width: 160 }} align="left">
+              <TableCell>
                 {moment.utc(row.date_created).local().format('MMMM Do YYYY, h:mm:ss a')}
+              </TableCell>
+              <TableCell>
+                {row.uid}
               </TableCell>
             </TableRow>
           ))}
@@ -154,7 +168,7 @@ export default function Customers(props) {
           <TableRow>
             <TablePagination
               rowsPerPageOptions={[5, 10, 25, { label: 'All', value: -1 }]}
-              colSpan={3}
+              colSpan={5}
               count={customers.length}
               rowsPerPage={rowsPerPage}
               page={page}

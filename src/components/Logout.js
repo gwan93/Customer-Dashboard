@@ -1,9 +1,16 @@
 import { Button } from '@material-ui/core';
 import { useHistory } from "react-router-dom";
 import axios from 'axios';
+import { makeStyles } from "@material-ui/core/styles";
 
+const useStyles = makeStyles({
+  logoutButton: {
+    width: '100px'
+  }
+});
 
 export default function Logout(props) {
+  const classes = useStyles();
   const history = useHistory();
   const { setState, removeCookie } = props;
 
@@ -22,7 +29,7 @@ export default function Logout(props) {
 
   return (
     <>
-      <Button variant="outlined" onClick={logoutUser}>Logout</Button>
+      <Button variant="contained" className={classes.logoutButton} onClick={logoutUser}>Logout</Button>
     </>
   )
 }

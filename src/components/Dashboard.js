@@ -4,30 +4,11 @@ import Customers from './Customers';
 import AddCustomer from './AddCustomer';
 import Logout from './Logout';
 import { makeStyles } from '@material-ui/core/styles';
-import { CssBaseline, Box, Button, Drawer, AppBar, Toolbar, List, Typography, Divider, IconButton, Link, Badge, Container, Grid, Paper } from '@material-ui/core';
+import { CssBaseline, Drawer, List, Typography, Divider, IconButton, Container, Grid, Paper } from '@material-ui/core';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
-import MenuIcon from '@material-ui/icons/Menu';
-import NotificationsIcon from '@material-ui/icons/Notifications';
+import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import { mainListItems, secondaryListItems } from './ListItems';
 import clsx from 'clsx';
-import Deposits from './Deposits';
-import Orders from './Orders';
-import Title from './Title';
-
-
-
-function Copyright() {
-  return (
-    <Typography variant="body2" color="textSecondary" align="center">
-      {'Copyright © '}
-      <Link color="inherit" href="https://material-ui.com/">
-        Your Website
-      </Link>{' '}
-      {new Date().getFullYear()}
-      {'.'}
-    </Typography>
-  );
-}
 
 const drawerWidth = 240;
 
@@ -108,6 +89,11 @@ const useStyles = makeStyles((theme) => ({
   fixedHeight: {
     height: 240,
   },
+  logoutButton: {
+    display: 'flex',
+    flex: 1,
+    alignItems: 'center'
+  }
 }));
 
 
@@ -117,7 +103,6 @@ export default function Dashboard(props) {
   const [last, setLast] = useState("");
   const [profession, setProfession] = useState("");
   const [customers, setCustomers] = useState([]);
-  const [showAddCustomer, setShowAddCustomer] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const classes = useStyles();
 
@@ -132,10 +117,6 @@ export default function Dashboard(props) {
       setCustomers([]);
     }
   }, [])
-
-  const toggleAddCustomer = () => {
-    setShowAddCustomer(!showAddCustomer)
-  }
 
   const [open, setOpen] = useState(true);
   const handleDrawerOpen = () => {
@@ -172,27 +153,6 @@ export default function Dashboard(props) {
     <div>
       <div className={classes.root}>
         <CssBaseline />
-        <AppBar position="absolute" className={clsx(classes.appBar, open && classes.appBarShift)}>
-          <Toolbar className={classes.toolbar}>
-            <IconButton
-              edge="start"
-              color="inherit"
-              aria-label="open drawer"
-              onClick={handleDrawerOpen}
-              className={clsx(classes.menuButton, open && classes.menuButtonHidden)}
-            >
-              <MenuIcon />
-            </IconButton>
-            <Typography component="h1" variant="h6" color="inherit" noWrap className={classes.title}>
-              Dashboard
-            </Typography>
-            <IconButton color="inherit">
-              <Badge badgeContent={4} color="secondary">
-                <NotificationsIcon />
-              </Badge>
-            </IconButton>
-          </Toolbar>
-        </AppBar>
         <Drawer
           variant="permanent"
           classes={{
@@ -201,9 +161,18 @@ export default function Dashboard(props) {
           open={open}
         >
           <div className={classes.toolbarIcon}>
-            <IconButton onClick={handleDrawerClose}>
-              <ChevronLeftIcon />
-            </IconButton>
+            {!open && (
+              <IconButton
+                onClick={handleDrawerOpen}
+              >
+                <ChevronRightIcon />
+              </IconButton>
+            )}
+            {open && (
+              <IconButton onClick={handleDrawerClose}>
+                <ChevronLeftIcon />
+              </IconButton>
+            )}
           </div>
           <Divider />
           <List>{mainListItems}</List>
@@ -214,19 +183,21 @@ export default function Dashboard(props) {
           <div className={classes.appBarSpacer} />
           <Container maxWidth="lg" className={classes.container}>
             <Grid container spacing={3}>
-              {/* Recent Deposits */}
+              {/* Welcome */}
               <Grid item xs={12} md={4} lg={3}>
                 <Paper className={fixedHeightPaper}>
-                  <Typography component="h2" variant="h6" color="primary" gutterBottom>Welcome</Typography>
-                  <Typography component="p" variant="h4">
-                    {state.username}
+                  <Typography component="h2" variant="h6" color="primary" gutterBottom>Dashboard</Typography>
+                  <Typography component="p" variant="h5">
+                    Welcome, {state.username}
                   </Typography>
+                  <div className={classes.logoutButton}>
+                    <Logout setState={setState} removeCookie={removeCookie}/>
+                  </div>
                 </Paper>
               </Grid>
-              {/* Chart */}
+              {/* Create Customer */}
               <Grid item xs={12} md={8} lg={9}>
                 <Paper className={fixedHeightPaper}>
-                  {/* <Chart /> */}
                   <AddCustomer
                     first={first}
                     setFirst={setFirst}
@@ -240,46 +211,16 @@ export default function Dashboard(props) {
 
                 </Paper>
               </Grid>
-              {/* Recent Orders */}
+              {/* All Customers */}
               <Grid item xs={12}>
                 <Paper className={classes.paper}>
                   <Customers customers={customers} state={state} />
                 </Paper>
               </Grid>
             </Grid>
-            <Box pt={4}>
-              <Copyright />
-            </Box>
           </Container>
         </main>
       </div>
-
-      {/* <h1>Dashboard</h1>
-      <h2>Welcome, {state.username}</h2>
-      <Logout setState={setState} removeCookie={removeCookie}/>
-      <div>
-        <Button
-          variant="outlined"
-          onClick={toggleAddCustomer}
-          color={showAddCustomer ? "secondary" : "primary"}
-          style={{width: 175}}
-        >
-          {showAddCustomer ? "Close" : "Add Customer"}
-        </Button>
-      </div>
-      {showAddCustomer && (
-        <AddCustomer
-          first={first}
-          setFirst={setFirst}
-          last={last}
-          setLast={setLast}
-          profession={profession}
-          setProfession={setProfession}
-          onSubmit={onSubmit}
-        />
-      )} */}
-      {/* {errorMessage.length !== 0 && <h6>{errorMessage}</h6>} */}
-      {/* <Customers customers={customers} state={state} /> */}
     </div>
   );
 }

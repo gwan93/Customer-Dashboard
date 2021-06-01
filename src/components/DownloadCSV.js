@@ -14,7 +14,7 @@ export default function DownloadCSV(props) {
 
   return (
     <div>
-      <CSVLink data={customers} filename={"customers.csv"} headers={headers}>{linkText}</CSVLink>
+      <CSVLink style={{textDecoration: 'none'}} data={customers} filename={"customers.csv"} headers={headers}>{linkText}</CSVLink>
     </div>
   )
 }

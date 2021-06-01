@@ -8,9 +8,10 @@ const useStyles = makeStyles({
     justifyContent: "flex-start"
   },
   createButton: {
-    width: '100px'
+    width: '100px',
+    borderRadius: '22px'
   },
-  saveButton: {
+  buttonContainer: {
     display: 'flex',
     flex: 1,
     alignItems: 'center'
@@ -62,8 +63,8 @@ export default function AddCustomer(props) {
           className={classes.formElement}
         />
       </div>
-      <div className={classes.saveButton}>
-        <Button type="submit" variant="contained" className={classes.createButton} onClick={(e) => onSubmit(e)}>
+      <div className={classes.buttonContainer}>
+        <Button type="submit" variant="contained" className={classes.createButton} color="secondary" onClick={(e) => onSubmit(e)}>
           Save
         </Button>
       </div>

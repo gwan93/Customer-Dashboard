@@ -17,7 +17,8 @@ const useStyles = makeStyles((theme) => ({
     color: 'white'
   },
   currentUser: {
-    padding: '0 0.8em 0 0.8em'
+    padding: '0 0.8em 0 0.8em',
+    color: 'white'
   }
 }));
 

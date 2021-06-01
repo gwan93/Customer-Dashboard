@@ -34,6 +34,9 @@ const useStyles = makeStyles((theme) => ({
   cardContent: {
     flexGrow: 1,
   },
+  btn: {
+    borderRadius: '22px',
+  }
 }));
 
 export default function Home() {
@@ -55,12 +58,12 @@ export default function Home() {
             <div className={classes.heroButtons}>
               <Grid container spacing={2} justify="center">
                 <Grid item>
-                  <Button variant="contained" color="primary">
+                  <Button className={classes.btn} variant="contained" color="secondary">
                     Get started
                   </Button>
                 </Grid>
                 <Grid item>
-                  <Button variant="outlined" color="primary">
+                  <Button className={classes.btn} variant="outlined" color="secondary">
                     Contact us
                   </Button>
                 </Grid>

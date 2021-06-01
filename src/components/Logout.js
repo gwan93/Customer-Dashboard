@@ -5,7 +5,8 @@ import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles({
   logoutButton: {
-    width: '100px'
+    width: '100px',
+    borderRadius: '22px'
   }
 });
 
@@ -32,7 +33,7 @@ export default function Logout(props) {
 
   return (
     <>
-      <Button variant="contained" className={classes.logoutButton} onClick={logoutUser}>Logout</Button>
+      <Button variant="contained" className={classes.logoutButton} color="secondary" onClick={logoutUser}>Logout</Button>
     </>
   )
 }

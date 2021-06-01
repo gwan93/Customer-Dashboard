@@ -80,7 +80,7 @@ const useStyles2 = makeStyles({
   },
   tableHead: {
     fontWeight: 900,
-    width: 160
+    width: 120
   }
 });
 

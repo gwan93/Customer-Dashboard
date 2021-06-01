@@ -1,15 +1,32 @@
-import { TextField, Button } from '@material-ui/core';
+import { TextField, Button, Avatar, CssBaseline, Link, Grid, Typography, Container } from '@material-ui/core';
 import { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import axios from 'axios';
 import { useHistory } from "react-router-dom";
+import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme) => ({
   formElement: {
     display: 'block'
-  }
-});
-
+  },
+  paper: {
+    marginTop: theme.spacing(8),
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+  },
+  avatar: {
+    margin: theme.spacing(1),
+    backgroundColor: theme.palette.secondary.main,
+  },
+  form: {
+    width: '100%', 
+    marginTop: theme.spacing(1),
+  },
+  submit: {
+    margin: theme.spacing(3, 0, 2),
+  },
+}));
 
 export default function Login(props) {
   const history = useHistory();
@@ -25,7 +42,6 @@ export default function Login(props) {
       setErrorMessage("Please provide a username and a password.");
       return;
     }
-    console.log(username, password);
     const postObj = {username, password};
     axios.post("/login", postObj)
     .then(response => {
@@ -44,44 +60,69 @@ export default function Login(props) {
     .catch(err => {
       console.log("ERROR", err)
     })
-
-    // post information
-    // set loading
-    // analyze response
-    // if fail then show error message
-    // if successful then redirect to home
-
   }
 
   return (
     <>
-      <h1>Login</h1>
-      {errorMessage.length > 0 && <h6>{errorMessage}</h6>}
-      <TextField
-        required
-        type="text"
-        id="username"
-        label="Username"
-        value={username}
-        variant="outlined"
-        onChange={(e) => setUsername(e.target.value)}
-        className={classes.formElement}
-      />
-
-      <TextField
-        required
-        type="password"
-        id="password"
-        label="Password"
-        value={password}
-        variant="outlined"
-        onChange={(e) => setPassword(e.target.value)}
-        className={classes.formElement}
-      />
-
-      <Button type="submit" variant="contained" onClick={(e) => onSubmit(e)}>
-        Login
-      </Button>
+      <Container component="main" maxWidth="xs">
+        <CssBaseline />
+        <div className={classes.paper}>
+          <Avatar className={classes.avatar}>
+            <LockOutlinedIcon />
+          </Avatar>
+          <Typography component="h1" variant="h5">
+            Login
+          </Typography>
+          {errorMessage.length > 0 && (
+            <Typography variant="body2" color="error">{errorMessage}</Typography>
+          )}
+          <form className={classes.form} noValidate>
+            <TextField
+              variant="outlined"
+              margin="normal"
+              required
+              fullWidth
+              id="username"
+              label="Username"
+              name="username"
+              autoComplete="username"
+              autoFocus
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+            />
+            <TextField
+              variant="outlined"
+              margin="normal"
+              required
+              fullWidth
+              name="password"
+              label="Password"
+              type="password"
+              id="password"
+              autoComplete="current-password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+            <Button
+              type="submit"
+              fullWidth
+              variant="contained"
+              color="primary"
+              className={classes.submit}
+              onClick={(e) => onSubmit(e)}
+            >
+              Login
+            </Button>
+            <Grid container>
+              <Grid item xs>
+                <Link href="#" variant="body2">
+                  Forgot password?
+                </Link>
+              </Grid>
+            </Grid>
+          </form>
+        </div>
+      </Container>
     </>
   );
 }

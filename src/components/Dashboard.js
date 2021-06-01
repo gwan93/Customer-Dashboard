@@ -93,6 +93,9 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     flex: 1,
     alignItems: 'center'
+  },
+  error: {
+    height: 20
   }
 }));
 
@@ -152,6 +155,7 @@ export default function Dashboard(props) {
         setFirst("");
         setLast("");
         setProfession("");
+        setErrorMessage("");
       }
     })
     .catch(err => {
@@ -217,7 +221,9 @@ export default function Dashboard(props) {
                     setProfession={setProfession}
                     onSubmit={onSubmit}
                   />
-                  {errorMessage.length !== 0 && <h6>{errorMessage}</h6>}
+                  <Typography variant="body2" color="error" className={classes.error}>
+                    {errorMessage.length !== 0 && errorMessage}
+                  </Typography>
 
                 </Paper>
               </Grid>

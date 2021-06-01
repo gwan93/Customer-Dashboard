@@ -14,6 +14,10 @@ const useStyles = makeStyles({
     display: 'flex',
     flex: 1,
     alignItems: 'center'
+  },
+  formElement: {
+    width: '33%',
+    paddingRight: '0.5em'
   }
 });
 

@@ -5,9 +5,16 @@ const useStyles = makeStyles((theme) => ({
   icon: {
     marginRight: theme.spacing(2),
   },
+  // heroContent: {
+  //   backgroundColor: theme.palette.background.paper,
+  //   padding: theme.spacing(8, 0, 6),
+  // },
   heroContent: {
-    backgroundColor: theme.palette.background.paper,
+    backgroundImage: `linear-gradient(rgba(255,255,255,0.6), rgba(255,255,255,0.6)), url(https://images.unsplash.com/photo-1485627941502-d2e6429a8af0?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1050&q=80)`,
+    backgroundRepeat: "no-repeat",
+    backgroundPosition: 'center',
     padding: theme.spacing(8, 0, 6),
+    overflow: 'hidden'
   },
   heroButtons: {
     marginTop: theme.spacing(4),
@@ -93,7 +100,7 @@ export default function Home() {
                     Responsive
                   </Typography>
                   <Typography>
-                    Access information anywhere with support for desktops and tablets.
+                    Access information anywhere with support for desktops and mobile devices.
                   </Typography>
                 </CardContent>
               </Card>

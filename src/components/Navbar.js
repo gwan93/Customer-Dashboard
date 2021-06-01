@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom";
 import { makeStyles } from '@material-ui/core/styles';
-import { AppBar, Toolbar, IconButton, Typography } from '@material-ui/core';
-import MenuIcon from '@material-ui/icons/Menu';
+import { AppBar, Toolbar, Typography } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -16,6 +15,9 @@ const useStyles = makeStyles((theme) => ({
   link: {
     textDecoration: 'none',
     color: 'white'
+  },
+  currentUser: {
+    padding: '0 0.8em 0 0.8em'
   }
 }));
 
@@ -27,15 +29,19 @@ export default function Navbar(props) {
     <div>
       <AppBar position="static">
         <Toolbar>
-          <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
-            <MenuIcon />
-          </IconButton>
           <Typography className={classes.title}>
-            <Link className={classes.link} to="/">Home </Link>
+            <Link className={classes.link} to="/">GW Dashboards </Link>
           </Typography>
-          <Typography>
-            {state.username && <Link className={classes.link} to="/dashboard">Dashboard </Link>}
-          </Typography>
+          {state.username && (
+            <>
+              <Typography className={classes.currentUser}>
+                {state.username}
+              </Typography>
+              <Typography>
+                <Link className={classes.link} to="/dashboard">Dashboard </Link>
+              </Typography>
+            </>
+          )}
           
           {!state.username && (
             <Typography>

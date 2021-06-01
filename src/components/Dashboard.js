@@ -109,7 +109,7 @@ export default function Dashboard(props) {
   useEffect(() => {
     axios.get("/customers")
     .then(res => {
-      setCustomers(res.data)
+      setCustomers(res.data.sort((a,b) => a.id - b.id))
     })
 
     // Cleanup if Dashboard is unmounted before the above async request completes

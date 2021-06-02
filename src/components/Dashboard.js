@@ -9,6 +9,7 @@ import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import { mainListItems, secondaryListItems } from './ListItems';
 import clsx from 'clsx';
+import PropTypes from 'prop-types';
 
 const drawerWidth = 240;
 
@@ -239,4 +240,13 @@ export default function Dashboard(props) {
       </div>
     </div>
   );
+}
+
+Dashboard.propTypes = {
+  state: PropTypes.shape({
+    username: PropTypes.string,
+    userId: PropTypes.oneOfType([ PropTypes.bool, PropTypes.number ])
+  }).isRequired,
+  setState: PropTypes.func.isRequired,
+  removeCookie: PropTypes.func.isRequired
 }

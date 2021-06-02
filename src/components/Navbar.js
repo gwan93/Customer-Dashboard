@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { makeStyles } from '@material-ui/core/styles';
 import { AppBar, Toolbar, Typography } from '@material-ui/core';
+import PropTypes from 'prop-types';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -54,4 +55,11 @@ export default function Navbar(props) {
       </AppBar>
     </div>
   )
+}
+
+Navbar.propTypes = {
+  state: PropTypes.shape({
+    username: PropTypes.string,
+    userId: PropTypes.oneOfType([ PropTypes.bool, PropTypes.number ])
+  }).isRequired,
 }

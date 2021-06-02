@@ -1,6 +1,6 @@
 import { makeStyles } from "@material-ui/core/styles";
 import { TextField, Button, Typography } from '@material-ui/core';
-
+import PropTypes from 'prop-types';
 
 const useStyles = makeStyles({
   createForm: {
@@ -24,7 +24,7 @@ const useStyles = makeStyles({
 
 export default function AddCustomer(props) {
   const classes = useStyles();
-  const {first, setFirst, last, setLast, profession, setProfession, onSubmit } = props;
+  const { first, setFirst, last, setLast, profession, setProfession, onSubmit } = props;
   
   return (
     <>
@@ -70,4 +70,14 @@ export default function AddCustomer(props) {
       </div>
     </>
   );
+}
+
+AddCustomer.propTypes = {
+  first: PropTypes.string.isRequired,
+  setFirst: PropTypes.func.isRequired,
+  last: PropTypes.string.isRequired,
+  setLast: PropTypes.func.isRequired,
+  profession: PropTypes.string.isRequired,
+  setProfession: PropTypes.func.isRequired,
+  onSubmit: PropTypes.func.isRequired,
 }

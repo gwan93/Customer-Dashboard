@@ -1,5 +1,5 @@
 import { CSVLink } from "react-csv";
-
+import PropTypes from 'prop-types';
 
 export default function DownloadCSV(props) {
   const { customers, linkText } = props;
@@ -17,4 +17,9 @@ export default function DownloadCSV(props) {
       <CSVLink style={{textDecoration: 'none'}} data={customers} filename={"customers.csv"} headers={headers}>{linkText}</CSVLink>
     </div>
   )
+}
+
+DownloadCSV.propTypes = {
+  customers: PropTypes.array.isRequired,
+  linkText: PropTypes.string.isRequired
 }

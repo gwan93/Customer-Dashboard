@@ -4,6 +4,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import axios from 'axios';
 import { useHistory } from "react-router-dom";
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
+import PropTypes from 'prop-types';
 
 const useStyles = makeStyles((theme) => ({
   formElement: {
@@ -126,4 +127,13 @@ export default function Login(props) {
       </Container>
     </>
   );
+}
+
+Login.propTypes = {
+  state: PropTypes.shape({
+    username: PropTypes.string,
+    userId: PropTypes.oneOfType([ PropTypes.bool, PropTypes.number ])
+  }).isRequired,
+  setState: PropTypes.func.isRequired,
+  setCookie: PropTypes.func.isRequired
 }

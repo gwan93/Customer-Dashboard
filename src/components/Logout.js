@@ -2,6 +2,7 @@ import { Button } from '@material-ui/core';
 import { useHistory } from "react-router-dom";
 import axios from 'axios';
 import { makeStyles } from "@material-ui/core/styles";
+import PropTypes from 'prop-types';
 
 const useStyles = makeStyles({
   logoutButton: {
@@ -36,4 +37,9 @@ export default function Logout(props) {
       <Button variant="contained" className={classes.logoutButton} color="secondary" onClick={logoutUser}>Logout</Button>
     </>
   )
+}
+
+Logout.propTypes = {
+  setState: PropTypes.func.isRequired,
+  removeCookie: PropTypes.func.isRequired
 }

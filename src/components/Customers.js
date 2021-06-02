@@ -184,3 +184,12 @@ export default function Customers(props) {
     </TableContainer>
   );
 }
+
+Customers.propTypes = {
+  state: PropTypes.shape({
+    username: PropTypes.string,
+    userId: PropTypes.oneOfType([ PropTypes.bool, PropTypes.number ])
+  }).isRequired,
+  customers: PropTypes.array.isRequired,
+  myCustomers: PropTypes.array.isRequired
+}

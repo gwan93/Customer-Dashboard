@@ -1,5 +1,6 @@
 import { Route, Redirect } from 'react-router-dom';
 import { useEffect, useState } from 'react';
+import PropTypes from 'prop-types';
 
 export default function ProtectedRoute({ component: Component, state, ...rest }) {
   const [loading, setLoading] = useState(true);
@@ -43,4 +44,13 @@ export default function ProtectedRoute({ component: Component, state, ...rest })
       )}
     </div>
   )
+}
+
+ProtectedRoute.propTypes = {
+  state: PropTypes.shape({
+    username: PropTypes.string,
+    userId: PropTypes.oneOfType([ PropTypes.bool, PropTypes.number ])
+  }).isRequired,
+  setState: PropTypes.func,
+  removeCookie: PropTypes.func
 }

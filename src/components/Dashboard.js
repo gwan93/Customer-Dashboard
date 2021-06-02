@@ -114,7 +114,10 @@ export default function Dashboard(props) {
 
   useEffect(() => {
     // Retrieve customers data when component is mounted
-    axios.get("/customers")
+    // Using a post request because the state object will be used on the backend
+    // to check if the user is logged in
+    // Axios.get does not allow objects to be sent, so post is used instead
+    axios.post(`${process.env.REACT_APP_API_URL}/customers`, {state})
     .then(res => {
       setCustomers(res.data.sort((a,b) => a.id - b.id));
       const customersCreatedByMe = res.data.filter(customer => customer.created_by === state.username)
@@ -125,7 +128,7 @@ export default function Dashboard(props) {
     return () => {
       setCustomers([]);
     }
-  }, [state.username])
+  }, [state])
 
   // Handlers to open and closer Drawer
   const handleDrawerOpen = () => {
@@ -144,8 +147,8 @@ export default function Dashboard(props) {
       setErrorMessage("Please fill out all required fields.");
       return;
     }
-    const postObj = {createdBy, first, last, profession};
-    axios.post("/customers", postObj)
+    const postObj = {createdBy, first, last, profession, state};
+    axios.post(`${process.env.REACT_APP_API_URL}/customers/new`, postObj)
     .then(res => {
       if (res.status === 200) {
         // res.data will come back with a key "created_by" with a value of integer. Replace that with username.
@@ -206,7 +209,7 @@ export default function Dashboard(props) {
                     Welcome, {state.username}
                   </Typography>
                   <div className={classes.logoutButton}>
-                    <Logout setState={setState} removeCookie={removeCookie}/>
+                    <Logout state={state} setState={setState} removeCookie={removeCookie}/>
                   </div>
                 </Paper>
               </Grid>

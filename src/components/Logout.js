@@ -14,13 +14,13 @@ const useStyles = makeStyles({
 export default function Logout(props) {
   const classes = useStyles();
   const history = useHistory();
-  const { setState, removeCookie } = props;
+  const { state, setState, removeCookie } = props;
 
   // Submits request to backend to delete Express cookie
   // Then resets state and removes client Cookie
   // Finally redirects to home page
   function logoutUser() {
-    axios.post("/logout")
+    axios.post(`${process.env.REACT_APP_API_URL}/logout`, {state})
     .then(() => {
       setState({
         username: "",
@@ -40,6 +40,10 @@ export default function Logout(props) {
 }
 
 Logout.propTypes = {
+  state: PropTypes.shape({
+    username: PropTypes.string,
+    userId: PropTypes.oneOfType([ PropTypes.bool, PropTypes.number ])
+  }).isRequired,
   setState: PropTypes.func.isRequired,
   removeCookie: PropTypes.func.isRequired
 }

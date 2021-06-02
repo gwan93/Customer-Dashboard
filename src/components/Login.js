@@ -45,9 +45,9 @@ export default function Login(props) {
       return;
     }
     const postObj = {username, password};
-    axios.post("/login", postObj)
+    axios.post(`${process.env.REACT_APP_API_URL}/login`, postObj)
     .then(response => {
-      if (response.data.status === 401) {
+      if (!response.data.username || response.data.status === 401) {
         setErrorMessage("Incorrect username or password.");
         return;
       }

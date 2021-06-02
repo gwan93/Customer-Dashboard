@@ -92,6 +92,7 @@ export default function Login(props) {
               autoFocus
               value={username}
               onChange={(e) => setUsername(e.target.value)}
+              data-testid="username"
             />
             <TextField
               variant="outlined"
@@ -104,6 +105,7 @@ export default function Login(props) {
               id="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
+              data-testid="password"
             />
             <Button
               type="submit"
@@ -112,6 +114,7 @@ export default function Login(props) {
               color="primary"
               className={classes.submit}
               onClick={(e) => onSubmit(e)}
+              data-testid="login"
             >
               Login
             </Button>

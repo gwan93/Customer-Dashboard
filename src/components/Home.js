@@ -86,7 +86,7 @@ export default function Home() {
                     Intuitive
                   </Typography>
                   <Typography>
-                    Comfortably integrate into your team environment with the easy to use and understand layout.
+                    Comfortably integrate into your team environment with the user-friendly layout.
                   </Typography>
                 </CardContent>
               </Card>

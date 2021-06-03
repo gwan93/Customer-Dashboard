@@ -1,5 +1,5 @@
 describe("Navigation", () => {
-  xit("Visits the home page", () => {
+  it("Visits the home page", () => {
     cy.visit("/");
 
     cy.get('h1')
@@ -9,7 +9,7 @@ describe("Navigation", () => {
     cy.contains('Contact us')
   });
 
-  xit("Visits the login page by clicking Login button", () => {
+  it("Visits the login page by clicking Login button", () => {
     cy.visit("/");
 
     cy.get("a")
@@ -21,7 +21,7 @@ describe("Navigation", () => {
     
     })
     
-  xit("Show a login error if there are empty fields", () => {
+  it("Show a login error if there are empty fields", () => {
     cy.visit("/login");
 
     cy.get('.MuiButton-label')
@@ -30,7 +30,7 @@ describe("Navigation", () => {
     cy.contains("Please provide a username and a password.")
   })
 
-  xit("Show a login error if the username or password are incorrect", () => {
+  it("Show a login error if the username or password are incorrect", () => {
     cy.visit("/login");
 
     cy.get('[data-testid=username]')
@@ -119,5 +119,17 @@ describe("Navigation", () => {
       .click()
 
     cy.contains("Please fill out all required fields.").should('not.exist')
+  })
+
+  it ("Logs a user out when clicking the logout button", () => {
+    cy.get("a")
+      .contains("Login")
+      .should('not.exist')
+    
+    cy.contains("Logout")
+      .click()
+
+    cy.get("a")
+      .contains("Login")
   })
 });

@@ -1,3 +1,5 @@
+const delay = 2200;
+
 describe("Navigation", () => {
   it("Visits the home page", () => {
     cy.visit("/");
@@ -7,47 +9,49 @@ describe("Navigation", () => {
     
     cy.contains('Get started')
     cy.contains('Contact us')
+    cy.wait(delay)
+
   });
 
   it("Visits the login page by clicking Login button", () => {
-    cy.visit("/");
-
     cy.get("a")
       .contains("Login")
       .click()
     
     cy.url()
       .should('include', '/login')
+    cy.wait(delay)
     
     })
     
   it("Show a login error if there are empty fields", () => {
-    cy.visit("/login");
-
-    cy.get('.MuiButton-label')
-      .click()
-
-    cy.contains("Please provide a username and a password.")
-  })
-
-  it("Show a login error if the username or password are incorrect", () => {
-    cy.visit("/login");
-
     cy.get('[data-testid=username]')
       .type('A Fake User')
 
+    cy.get('.MuiButton-label')
+      .click()
+    cy.wait(delay)
+
+    cy.contains("Please provide a username and a password.")
+    cy.wait(delay)
+
+  })
+
+  it("Show a login error if the username or password are incorrect", () => {
     cy.get('[data-testid=password]')
       .type('A fake password')
+    cy.wait(delay)
     
     cy.get('.MuiButton-label')
       .click()
+    cy.wait(delay)
 
     cy.contains("Incorrect username or password.")
+    cy.wait(delay)
+
   })
 
   it("Logs the user in when provided correct credentials", () => {
-    cy.visit("/login");
-
     cy.get('[data-testid=username]')
       .clear()
       .type('Alice')
@@ -55,9 +59,11 @@ describe("Navigation", () => {
     cy.get('[data-testid=password]')
       .clear()
       .type('alice')
-    
+    cy.wait(delay)
+
     cy.get('.MuiButton-label')
       .click()
+    cy.wait(delay)
 
     cy.url()
       .should('include', '/dashboard')
@@ -89,45 +95,58 @@ describe("Navigation", () => {
 
     cy.get('[aria-label="rows per page"]')
       .select('10')
+    cy.wait(delay)
     
     cy.contains('Frankie')
     cy.contains('Kelsey').should('not.exist')
 
     cy.get('[aria-label="next page"]')
       .click()
+    cy.wait(delay)
 
     cy.contains('Frankie').should('not.exist')
     cy.contains('Kelsey')
   })
 
   it("Show an error message when creating a customer with empty fields", () => {
-    cy.contains("Save")
-      .click()
-    
-    cy.contains("Please fill out all required fields.")
-
     cy.get('#first')
       .type('Cypress')
+    cy.wait(delay)
     
     cy.get('#last')
       .type('Demo')
-
-    cy.get('#profession')
-      .type('Automated Robot')
+    cy.wait(delay)
 
     cy.contains("Save")
       .click()
+    cy.wait(delay)
+    
+    cy.contains("Please fill out all required fields.")
+    cy.wait(delay)
+  })
+
+  it("Create a new customer", () => {
+    cy.get('#profession')
+      .type('Automated Robot')
+    cy.wait(delay)
+
+    cy.contains("Save")
+      .click()
+    cy.wait(delay)
 
     cy.contains("Please fill out all required fields.").should('not.exist')
+    cy.wait(delay)
   })
 
   it ("Logs a user out when clicking the logout button", () => {
     cy.get("a")
       .contains("Login")
       .should('not.exist')
+    cy.wait(delay)
     
     cy.contains("Logout")
       .click()
+    cy.wait(delay)
 
     cy.get("a")
       .contains("Login")

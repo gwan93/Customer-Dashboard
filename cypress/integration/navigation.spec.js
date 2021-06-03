@@ -13,6 +13,15 @@ describe("Navigation", () => {
 
   });
 
+  it("Redirects to an unauthorized page if the user isn't logged in", () => {
+    cy.visit("/dashboard")
+    cy.wait(delay)
+
+    cy.url()
+      .should('include', 'unauthorized')
+    cy.wait(delay)
+  })
+
   it("Visits the login page by clicking Login button", () => {
     cy.get("a")
       .contains("Login")

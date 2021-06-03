@@ -78,7 +78,7 @@ export default function Login(props) {
             Login
           </Typography>
           {errorMessage.length > 0 && (
-            <Typography variant="body2" color="error">{errorMessage}</Typography>
+            <Typography variant="body2" color="error" data-testid="errorMessage">{errorMessage}</Typography>
           )}
           <form className={classes.form} noValidate>
             <TextField
@@ -92,7 +92,7 @@ export default function Login(props) {
               autoFocus
               value={username}
               onChange={(e) => setUsername(e.target.value)}
-              data-testid="username"
+              inputProps={{ "data-testid": "username" }}
             />
             <TextField
               variant="outlined"
@@ -105,7 +105,7 @@ export default function Login(props) {
               id="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              data-testid="password"
+              inputProps={{ "data-testid": "password" }}
             />
             <Button
               type="submit"

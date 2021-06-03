@@ -92,6 +92,9 @@ const useStyles2 = makeStyles({
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'flex-end'
+  },
+  delete: {
+    cursor: 'pointer'
   }
 });
 
@@ -157,7 +160,7 @@ export default function Customers(props) {
                 {row.uid}
               </TableCell>
               <TableCell>
-                <ClearIcon onClick={(e) => onDelete(e, row.id)}/>
+                <ClearIcon className={classes.delete} onClick={(e) => onDelete(e, row.id)}/>
               </TableCell>
             </TableRow>
           ))}

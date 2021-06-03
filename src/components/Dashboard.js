@@ -167,6 +167,20 @@ export default function Dashboard(props) {
     })
   }
 
+  const onDelete = (e, id) => {
+    e.preventDefault();
+    axios.post(`${process.env.REACT_APP_API_URL}/customers/delete`, {id, state})
+    .then(res => {
+      if (res.status === 200) {
+        const filteredCustomers = [...customers].filter(customer => customer.id !== res.data.id);
+        const filteredMyCustomers = [...myCustomers].filter(customer => customer.id !== res.data.id);
+        setCustomers(filteredCustomers);
+        setMyCustomers(filteredMyCustomers);
+      }
+    })
+    .catch(err => console.log("ERROR!", err))
+  }
+
   return (
     <div>
       <div className={classes.root}>
@@ -234,7 +248,7 @@ export default function Dashboard(props) {
               {/* All Customers */}
               <Grid item xs={12}>
                 <Paper className={classes.paper}>
-                  <Customers customers={customers} myCustomers={myCustomers} state={state} />
+                  <Customers customers={customers} myCustomers={myCustomers} state={state} onDelete={onDelete}/>
                 </Paper>
               </Grid>
             </Grid>

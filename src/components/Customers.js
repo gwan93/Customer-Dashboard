@@ -5,6 +5,8 @@ import {Table,TableBody,TableCell, TableContainer, TableFooter, TablePagination,
 import {KeyboardArrowLeft, KeyboardArrowRight} from '@material-ui/icons';
 import FirstPageIcon from '@material-ui/icons/FirstPage'
 import LastPageIcon from '@material-ui/icons/LastPage'
+import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
+import ClearIcon from '@material-ui/icons/Clear';
 import DownloadCSV from './DownloadCSV';
 import moment from 'moment';
 
@@ -97,7 +99,7 @@ export default function Customers(props) {
   const classes = useStyles2();
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
-  const { customers, myCustomers } = props;
+  const { customers, myCustomers, onDelete } = props;
 
   const emptyRows = rowsPerPage - Math.min(rowsPerPage, customers.length - page * rowsPerPage);
 
@@ -130,6 +132,7 @@ export default function Customers(props) {
             <TableCell className={classes.tableHead} align="left">Profession</TableCell>
             <TableCell className={classes.tableHead} align="left">Created On</TableCell>
             <TableCell className={classes.tableHead} align="left">UID</TableCell>
+            <TableCell className={classes.tableHead} align="left"><DeleteForeverIcon /></TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -152,6 +155,9 @@ export default function Customers(props) {
               </TableCell>
               <TableCell>
                 {row.uid}
+              </TableCell>
+              <TableCell>
+                <ClearIcon onClick={(e) => onDelete(e, row.id)}/>
               </TableCell>
             </TableRow>
           ))}
@@ -191,5 +197,6 @@ Customers.propTypes = {
     userId: PropTypes.oneOfType([ PropTypes.bool, PropTypes.number ])
   }).isRequired,
   customers: PropTypes.array.isRequired,
-  myCustomers: PropTypes.array.isRequired
+  myCustomers: PropTypes.array.isRequired,
+  onDelete: PropTypes.func.isRequired
 }

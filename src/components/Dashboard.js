@@ -52,7 +52,7 @@ const useStyles = makeStyles((theme) => ({
       width: theme.spacing(9),
     },
   },
-  appBarSpacer: theme.mixins.toolbar,
+  // appBarSpacer: theme.mixins.toolbar,
   content: {
     flexGrow: 1,
     height: '100vh',
@@ -193,7 +193,7 @@ export default function Dashboard(props) {
           <List>{secondaryListItems}</List>
         </Drawer>
         <main>
-          <div className={classes.appBarSpacer} />
+          {/* <div className={classes.appBarSpacer} /> */}
           <Container maxWidth="lg" className={classes.container}>
             <Grid container spacing={3}>
               {/* Welcome */}

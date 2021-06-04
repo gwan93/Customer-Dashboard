@@ -10,7 +10,7 @@ const useStyles = makeStyles((theme) => ({
   //   padding: theme.spacing(8, 0, 6),
   // },
   heroContent: {
-    backgroundImage: `linear-gradient(rgba(255,255,255,0.6), rgba(255,255,255,0.6)), url(https://images.unsplash.com/photo-1485627941502-d2e6429a8af0?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1050&q=80)`,
+    backgroundImage: `linear-gradient(rgba(255,255,255,0.4), rgba(255,255,255,0.7)), url(https://images.unsplash.com/photo-1536300099515-6c61b290b654?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80)`,
     backgroundRepeat: "no-repeat",
     backgroundPosition: 'center',
     padding: theme.spacing(8, 0, 6),
@@ -52,7 +52,7 @@ export default function Home() {
             <Typography component="h1" variant="h2" align="center" color="textPrimary" gutterBottom>
               Information when you need it
             </Typography>
-            <Typography variant="h5" align="center" color="textSecondary" paragraph>
+            <Typography variant="h5" align="center" color="textPrimary" paragraph>
               GW Dashboards is an industry-leader when it comes to providing your organization with an easy to integrate platform to manage your important business data.
             </Typography>
             <div className={classes.heroButtons}>
@@ -63,7 +63,7 @@ export default function Home() {
                   </Button>
                 </Grid>
                 <Grid item>
-                  <Button className={classes.btn} variant="outlined" color="secondary">
+                  <Button className={classes.btn} variant="contained" color="secondary">
                     Contact us
                   </Button>
                 </Grid>

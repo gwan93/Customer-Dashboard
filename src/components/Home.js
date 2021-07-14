@@ -56,7 +56,7 @@ export default function Home() {
               GW Dashboards is an industry-leader when it comes to providing your organization with an easy to integrate platform to manage your important business data.
             </Typography>
             <div className={classes.heroButtons}>
-              <Grid container spacing={2} justify="center">
+              <Grid container spacing={2} justifyContent="center">
                 <Grid item>
                   <Button className={classes.btn} variant="contained" color="secondary">
                     Get started

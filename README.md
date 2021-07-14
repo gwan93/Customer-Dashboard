@@ -1,6 +1,6 @@
 # Dashboard App
 
-A React project that allows users to access a Dashboard to manage customers.
+A React project that allows users to access a Dashboard to manage customers. Users may also export customer information into .csv files.
 
 ## Running the App Locally
 

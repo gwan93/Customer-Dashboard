@@ -36,19 +36,24 @@ export default function Login(props) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState(""); // Provide user feedback on unsuccessful login
+  const [isLoggingIn, setIsLoggingIn] = useState(false);
 
   const onSubmit = (e) => {
     e.preventDefault();
+    setIsLoggingIn(true);
     // Check that a username AND password have been provided
     if (username.length === 0 || password.length === 0) {
       setErrorMessage("Please provide a username and a password.");
+      setIsLoggingIn(false);
       return;
     }
     const postObj = {username, password};
     axios.post(`${process.env.REACT_APP_API_URL}/login`, postObj)
     .then(response => {
+      setIsLoggingIn(true)
       if (!response.data.username || response.data.status === 401) {
         setErrorMessage("Incorrect username or password.");
+        setIsLoggingIn(false);
         return;
       }
       // Update state and create client cookie with authentication details
@@ -116,7 +121,7 @@ export default function Login(props) {
               onClick={(e) => onSubmit(e)}
               data-testid="login"
             >
-              Login
+              {isLoggingIn ? "Logging in. Please wait." : "Login"}
             </Button>
             <Grid container>
               <Grid item xs>

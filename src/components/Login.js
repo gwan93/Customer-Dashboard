@@ -33,8 +33,8 @@ export default function Login(props) {
   const history = useHistory(); // For redirection after successful login
   const classes = useStyles();
   const { state, setState, setCookie } = props;
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
+  const [username, setUsername] = useState("Alice");
+  const [password, setPassword] = useState("alice");
   const [errorMessage, setErrorMessage] = useState(""); // Provide user feedback on unsuccessful login
   const [isLoggingIn, setIsLoggingIn] = useState(false);
 

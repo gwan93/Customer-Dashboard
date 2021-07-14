@@ -20,10 +20,20 @@ Cypress tests can be run with `npm run cypress open -P .` and then clicking on t
 
 ## Screenshots
 
+Home page
+<br>
 !['Home'](https://github.com/gwan93/dashboard/blob/master/docs/Home.png?raw=true)
 <br>
-
-!['Login'](https://github.com/gwan93/dashboard/blob/master/docs/Login.png?raw=true)
 <br>
 
+
+User login page
+<br>
+!['Login'](https://github.com/gwan93/dashboard/blob/master/docs/Login.png?raw=true)
+<br>
+<br>
+
+
+Dashboard page
+<br>
 !['Dashboard'](https://github.com/gwan93/dashboard/blob/master/docs/Dashboard.png?raw=true)

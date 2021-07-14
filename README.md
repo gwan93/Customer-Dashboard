@@ -17,3 +17,13 @@ To start the app, type `npm start` into your terminal to open the app in develop
 Jest tests can be run with `npm test`.
 
 Cypress tests can be run with `npm run cypress open -P .` and then clicking on the `navigation.spec.js` option which will open up a browser. If the app did not open on port 3000, open `cypress.json` and change the localhost number from 3000 to the port the app is running on.
+
+## Screenshots
+
+!['Home'](https://github.com/gwan93/dashboard/blob/master/docs/Home.png?raw=true)
+<br>
+
+!['Login'](https://github.com/gwan93/dashboard/blob/master/docs/Login.png?raw=true)
+<br>
+
+!['Dashboard'](https://github.com/gwan93/dashboard/blob/master/docs/Dashboard.png?raw=true)

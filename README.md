@@ -2,7 +2,7 @@
 
 A React project that allows users to access a Dashboard to manage customers. Users may also export customer information into .csv files.
 
-[Hosted on Heroku](https://gwdashboards.herokuapp.com/) - Please wait 30-60 seconds for the Heroku server to start up after clicking the link.
+[Hosted on Heroku](https://gwdashboards.netlify.app/) - Please wait 15-30 seconds for the Netlify server to start up after clicking the link.
 
 ## Running the App Locally
 

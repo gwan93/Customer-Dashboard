@@ -1,5 +1,7 @@
 import { Button, Card, CardContent, CardMedia, CssBaseline, Grid, Typography, Container } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
+import { useEffect } from 'react';
+import axios from 'axios';
 
 const useStyles = makeStyles((theme) => ({
   icon: {
@@ -41,6 +43,11 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Home() {
   const classes = useStyles();
+
+  useEffect(() => {
+    // Sends a ping to the Heroku API server to wake it up
+    axios.post(`${process.env.REACT_APP_API_URL}/login`, {username: "", password: ""})
+  }, [])
 
   return (
     <div>
